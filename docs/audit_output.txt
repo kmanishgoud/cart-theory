@@ -1,0 +1,77 @@
+    area    |                          check_name                          | result 
+------------+--------------------------------------------------------------+--------
+ 1 Keys     | customers: customer_ids with more than one order             |      0
+ 1 Keys     | customers: distinct customer_unique_id (real people)         |  96096
+ 1 Keys     | customers: duplicate customer_id                             |      0
+ 1 Keys     | geolocation: extra rows beyond one per zip prefix            | 981148
+ 1 Keys     | order_items: duplicate (order_id, order_item_id)             |      0
+ 1 Keys     | orders: duplicate order_id                                   |      0
+ 1 Keys     | payments: duplicate (order_id, payment_sequential)           |      0
+ 1 Keys     | products: duplicate product_id                               |      0
+ 1 Keys     | reviews: duplicate review_id rows                            |    814
+ 1 Keys     | reviews: orders with more than one review                    |    547
+ 1 Keys     | sellers: duplicate seller_id                                 |      0
+ 2 Orphans  | customers whose zip prefix is not in geolocation             |    278
+ 2 Orphans  | order_items whose order_id is not in orders                  |      0
+ 2 Orphans  | order_items whose product_id is not in products              |      0
+ 2 Orphans  | order_items whose seller_id is not in sellers                |      0
+ 2 Orphans  | orders whose customer_id is not in customers                 |      0
+ 2 Orphans  | payments whose order_id is not in orders                     |      0
+ 2 Orphans  | product categories with no English translation               |      2
+ 2 Orphans  | reviews whose order_id is not in orders                      |      0
+ 3 Coverage | orders with no items                                         |    775
+ 3 Coverage | orders with no payment                                       |      1
+ 3 Coverage | orders with no review                                        |    768
+ 3 Coverage | products with no category                                    |    610
+ 4 Logic    | approved before purchase                                     |      0
+ 4 Logic    | delivered orders with no delivery date                       |      8
+ 4 Logic    | delivered to customer before handed to carrier               |     23
+ 4 Logic    | handed to carrier before purchase                            |    166
+ 5 Values   | items with price <= 0                                        |      0
+ 5 Values   | orders where payments differ from items + freight by > 1 BRL |    249
+ 5 Values   | payments with 0 instalments                                  |      2
+ 5 Values   | payments with type not_defined                               |      3
+ 5 Values   | payments with value = 0                                      |      9
+(32 rows)
+
+ order_status | orders 
+--------------+--------
+ delivered    |  96478
+ shipped      |   1107
+ canceled     |    625
+ unavailable  |    609
+ invoiced     |    314
+ processing   |    301
+ created      |      5
+ approved     |      2
+(8 rows)
+
+   month    | orders 
+------------+--------
+ 2016-09-01 |      4
+ 2016-10-01 |    324
+ 2016-12-01 |      1
+ 2017-01-01 |    800
+ 2017-02-01 |   1780
+ 2017-03-01 |   2682
+ 2017-04-01 |   2404
+ 2017-05-01 |   3700
+ 2017-06-01 |   3245
+ 2017-07-01 |   4026
+ 2017-08-01 |   4331
+ 2017-09-01 |   4285
+ 2017-10-01 |   4631
+ 2017-11-01 |   7544
+ 2017-12-01 |   5673
+ 2018-01-01 |   7269
+ 2018-02-01 |   6728
+ 2018-03-01 |   7211
+ 2018-04-01 |   6939
+ 2018-05-01 |   6873
+ 2018-06-01 |   6167
+ 2018-07-01 |   6292
+ 2018-08-01 |   6512
+ 2018-09-01 |     16
+ 2018-10-01 |      4
+(25 rows)
+
